@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Category
@@ -27,6 +28,11 @@ class Category
      * @ORM\Column(name="label", type="string", length=255, nullable=false)
      */
     private $label;
+
+    /**
+     * @OneToMany(targetEntity="Expense", mappedBy="category")
+     */
+    private $expense;
 
     public function getId(): ?int
     {

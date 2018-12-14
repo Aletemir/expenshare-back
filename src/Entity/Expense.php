@@ -43,9 +43,9 @@ class Expense
     private $createdAt;
 
     /**
-     * @var \Category
+     * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category" inversedBy="expense")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * })
@@ -53,7 +53,7 @@ class Expense
     private $category;
 
     /**
-     * @var \Person
+     * @var Person
      *
      * @ORM\ManyToOne(targetEntity="Person")
      * @ORM\JoinColumns({
@@ -61,6 +61,8 @@ class Expense
      * })
      */
     private $person;
+
+
 
     public function getId(): ?int
     {

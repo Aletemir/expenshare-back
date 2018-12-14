@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * ShareGroup
  *
  * @ORM\Table(name="share_group", uniqueConstraints={@ORM\UniqueConstraint(name="slug_UNIQUE", columns={"slug"})})
  * @ORM\Entity
+ *
  */
 class ShareGroup
 {
@@ -41,6 +43,11 @@ class ShareGroup
      * @ORM\Column(name="closed", type="boolean", nullable=false)
      */
     private $closed = '0';
+
+    /**
+     * @OneToMany(targetEntity="Person", mappedBy="ShareGroup")
+     */
+    private $person;
 
     public function getId(): ?int
     {
@@ -80,6 +87,17 @@ class ShareGroup
     {
         $this->closed = $closed;
 
+        return $this;
+    }
+
+    public function getPerson()
+    {
+        return $this->person;
+    }
+
+    public function setPerson($person): self
+    {
+        $this->person = $person;
         return $this;
     }
 

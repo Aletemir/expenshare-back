@@ -36,14 +36,24 @@ class Person
     private $lastname;
 
     /**
-     * @var \ShareGroup
+     * @var ShareGroup
      *
-     * @ORM\ManyToOne(targetEntity="ShareGroup")
+     * @ORM\ManyToOne(targetEntity="ShareGroup", inversedBy="person")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="share_group_id", referencedColumnName="id")
      * })
      */
     private $shareGroup;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Debt", inversedBy"to")
+     */
+    private $to;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Debt", inversedBy"from")
+     */
+    private $from;
 
     public function getId(): ?int
     {
@@ -83,6 +93,28 @@ class Person
     {
         $this->shareGroup = $shareGroup;
 
+        return $this;
+    }
+
+    public function getTo()
+    {
+        return $this->to;
+    }
+
+    public function setTo($to): self
+    {
+        $this->to = $to;
+        return $this;
+    }
+
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    public function setFrom($from): self
+    {
+        $this->from = $from;
         return $this;
     }
 
